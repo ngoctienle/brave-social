@@ -1,14 +1,10 @@
-import { BrowserRouter } from 'react-router-dom'
-import { AppRouter } from './routes.tsx'
+import { Fragment } from 'react'
+
+import { useAppRouter } from './routes.tsx'
 
 function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
-    </>
-  )
+  const routeElements = useAppRouter()
+  return <Fragment>{routeElements}</Fragment>
 }
 
 export default App

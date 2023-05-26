@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
+import { Loader2 } from 'lucide-react'
 import { VariantProps, cva } from 'class-variance-authority'
 
 import { cn } from 'src/services/utils/utils'
@@ -35,6 +36,11 @@ export interface ButtonProps
   asChild?: boolean
 }
 
+interface IAsyncButtonProps extends ButtonProps {
+  isLoading?: boolean
+  isError?: boolean
+}
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
@@ -45,4 +51,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = 'Button'
 
-export { Button, buttonVariants }
+const AsyncButton: React.FC<IAsyncButtonProps> = ({ isLoading, isError, children, ...props }) => {
+  return (
+    <Button disabled={isLoading || isError} {...props}>
+      {isLoading ? <Loader2 className='h-5 w-5 animate-spin' /> : children}
+    </Button>
+  )
+}
+
+export { Button, buttonVariants, AsyncButton }

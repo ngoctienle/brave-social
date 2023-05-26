@@ -2,7 +2,7 @@ import { useRoutes } from 'react-router-dom'
 
 import { AuthTabs, ForgotPassword, ResetPassword } from 'src/pages/auth'
 
-export const AppRouter = () => {
+export const useAppRouter = () => {
   const elements = useRoutes([
     {
       path: '/',
